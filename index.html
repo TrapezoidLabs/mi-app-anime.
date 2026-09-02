@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Anime</title><style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    padding: 20px;
+    background: #181818;
+    text-align: center;
+}
+
+h1 {
+    margin: 0 0 15px;
+}
+
+input {
+    width: 90%;
+    max-width: 500px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+main {
+    padding: 20px;
+}
+
+.anime {
+    background: #1d1d1d;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.anime h2 {
+    margin-top: 0;
+}
+
+button {
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    margin: 5px;
+    font-size: 15px;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+#visor {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 10;
+}
+
+#visor iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+    background: #e50914;
+}
+</style></head><body><header>
+    <h1>🎬 Mi Anime</h1>
+    <input
+        type="text"
+        id="buscador"
+        placeholder="Buscar anime..."
+        oninput="buscarAnime()"
+    >
+</header><main id="catalogo"><div class="anime">
+    <h2>Mi primer anime</h2>
+    <p>Temporada 1</p>
+
+    <button onclick="abrirCapitulo('https://ejemplo.com')">
+        ▶ Capítulo 1
+    </button>
+
+    <button onclick="abrirCapitulo('https://ejemplo.com')">
+        ▶ Capítulo 2
+    </button>
+</div>
+
+</main><div id="visor">
+    <button id="cerrar" onclick="cerrarVideo()">✕ Cerrar</button><iframe id="pagina"></iframe>
+
+</div><script>
+
+function abrirCapitulo(url) {
+    document.getElementById("pagina").src = url;
+    document.getElementById("visor").style.display = "block";
+}
+
+function cerrarVideo() {
+    document.getElementById("pagina").src = "";
+    document.getElementById("visor").style.display = "none";
+}
+
+function buscarAnime() {
+
+    let texto = document
+        .getElementById("buscador")
+        .value
+        .toLowerCase();
+
+    let animes = document.querySelectorAll(".anime");
+
+    animes.forEach(function(anime) {
+
+        let nombre = anime.innerText.toLowerCase();
+
+        if (nombre.includes(texto)) {
+            anime.style.display = "block";
+        } else {
+            anime.style.display = "none";
+        }
+
+    });
+}
+
+</script></body>
+  </html>
